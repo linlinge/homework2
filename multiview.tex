@@ -142,6 +142,7 @@ C_{ij}(p)=\rho(I_i(\Omega(\pi_i(p))),I_j(\Omega(\pi_j(p))))
 其中$\pi(p)$是使得点p投影到照片上一点的函数，$\Omega(x)$函数定义了一个点$x$周围的区域，$I(x)$函数代表了照片区域的强度特征，$\rho(f,g)$是用来比较两个向量之间的相似程度的。$\rho$函数和$\Omega$函数的具体选择决定这个”一致性判别“的准确度。
 
 \subsubsection{立体融合(Stereo Fusion)}
+
 \subsubsection{泊松重建(Poisson Mesher)}
 
 \section{点云数据的预处理}
@@ -163,6 +164,16 @@ C_{ij}(p)=\rho(I_i(\Omega(\pi_i(p))),I_j(\Omega(\pi_j(p))))
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.25]{point-cloud-resampling.png}
+\caption{基于双目的三维重建系统流程示意图}
+\end{center}
+\end{figure}
+
+\section{点云的刚性配准和非刚性配准}
+在点云数据采集过程中，由于视角限制和自遮挡等问题，大多数的点云获取设备一次只能获取单个视角的点云数据。因此，为了重建一个完整物体，需要从多个视角进行点云获取，并利用刚性变换将多个视角的点云配准成一个整体，这一过程即为多视角刚性配准。
+\par 在针对非刚性物体进行三维模型重建，因为多视角点云数据的获取一般不能同步完成，所以在数据采集的过程中，非刚性对象难免会发生非刚性运动，最终获取到的点云数据会带有低频的非刚性形变；另一方面，点云获取设备自身所带的标定误差也可能对点云数据的产生低频的非刚性形变\upcite{non_rigid_register01}。对这类点云数据，通常需要依靠非刚性配准才能取得较好的配准效果。
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.25]{non-rigid-registration.png}
 \caption{基于双目的三维重建系统流程示意图}
 \end{center}
 \end{figure}
